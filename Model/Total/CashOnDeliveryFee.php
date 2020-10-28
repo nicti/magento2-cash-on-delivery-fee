@@ -68,15 +68,14 @@ class CashOnDeliveryFee extends AbstractTotal
         if ($base_value) {
             $currency = $quote->getStore()->getCurrentCurrency();
             $value = $this->baseCurrency->convert($base_value, $currency);
-        } else {
-            $value = null;
+            return [
+                'code' => static::TOTAL_CODE,
+                'title' => static::LABEL,
+                'base_value' => $base_value,
+                'value' => $value
+            ];
         }
-        return [
-            'code' => static::TOTAL_CODE,
-            'title' => static::LABEL,
-            'base_value' => $base_value,
-            'value' => $value
-        ];
+        return [];
     }
 
     public function getLabel(): Phrase
